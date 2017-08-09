@@ -12,14 +12,39 @@
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
+   <script type="text/javascript">
+       function missing_info () {
+           var inputName = document.getElementById('inputName') .value;
+            var inputEmail = document.getElementById('inputEmail') .value;
+            var inputGrpSize = document.getElementById('inputGrpSize') .value;
+            
+            if(inputName == "" || inputEmail == "") {
+                alert('Please fill in all fields');
+                return false;
+           
+            }
+       }
+       
+       function validateEmail(inputEmail)  
+{  
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+return mailformat.test(inputEmail);
+}
+function continueornot() {
+    if(validateEmail(document.getElementById('inputEmail').value)){
+    // ok
+    }else{ alert("You have entered an invalid email address!"); return false;}
+ }
+   </script>
+   
+   <meta charset="UTF-8">
     <title>Document</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
                 <br />
-                    <form name="grphelp">
+                    <form name="grphelp" method="post" onsubmit="return missing_info()" "return continueornot()" action="submission.html">
                         <div><h1>Group Help Satisfaction Survey</h1></div>
                         <div class="form-group">
                             <div>
@@ -32,27 +57,70 @@
                             </div>
                         <div>
                             <label for="inputEmail" class="control-label col-sm-2">Email Address</label>
-                             <input class="form-control" type="text" id="inputEmail" placeholder="Email Address" />
+                             <input class="form-control" type="email" id="inputEmail" placeholder="Email Address" />
                                </div>
                               <div>
-                                <label for="inputGrpSize" class="control-label col-sm-2">Number of Group Members</label>
-                                <input class="form-control" type="number" id="inputGrpSize" placeholder="Group Size" />
+                                <label for="inputGrpSize" class="control-label col-sm-4">Number of Group Members</label>
+                                <input class="form-control" type="number" min='1' max='10' id="inputGrpSize" placeholder="Group Size" />
                               </div>
-                              <div class="radio">
-                                  <label class="radio-inline">
-                                      <input type="radio" name="radio-group" id="opt1" value="1">Less than a year
-                                  </label>
-                                  <label class="radio-inline">
-                                      <input type="radio" name="radio-group" id="opt2" value="2">1-3 years
-                                  </label>
-                                  <label class="radio-inline">
-                                      <input type="radio" name="radio-group" id="opt3" value="3">5 years +
-                                  </label>
-                        </div>
+                              <div>
+                                  How long have you been coding 
+                                  <b>
+                                <div class="radio">
+                                <div><label class="radio">
+                                 <input type="radio" name="exp" id="cdexp1" value="1" required="required">Less than a year
+                                  </label></div>
+                                  <div><label class="radio">
+                                      <input type="radio" name="exp" id="cdexp2" value="2">1-3 years
+                                  </label></div>
+                                  <div><label class="radio">
+                                      <input type="radio" name="exp" id="cdexp3" value="3">5 years +
+                                  </label></div>
+                                  </div>
+                                  </div>
+                                  </div></b>
+                                  <div>
+                                  Which programming languages have you worked with?  Check all that apply.
+                                  <b>
+                                  <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" value="option1">
+                                    Javascript
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" value="option2">
+                                    HTML
+                                    </label>
+                                    </div>
+                                    <div class="checkbox">
+                                    <label>
+                                       <input type="checkbox" value="option3">
+                                       jquery
+                                     </label>
+                                    </div>
+                                  </div></b>
+                                  </div>
+                                <div class="form-group">
+                            <label for="inputComments">What changes would you like to see?</label>
+                            <textarea class="form-control" id="inputComments" rows="10"
+                            placeholder="I would like to see..."></textarea>
+                            </div>
+                            <div class="dropdown">
+                                <label for="dropdown">What is the best way to reach you?</label>
+                            <select>
+                              <option value="phonecall">Phonecall</option>
+                              <option value="text">Text</option>
+                              <option value="email">Email</option>
+                            </select>
+                            </div>
+                        
                         <div class="form-group">
-                            <div class="col-sm-10"><button type="submit">Login</button>
+                            <div class="col-sm-10"><button type="submit" onclick = "validateEmail(document.grphelp.inputEmail)" "return continueornot();">Submit</button>
                             </div>
                             </div>
+                            <script src = "survey.js"></script>
                     </form>
         </div>
     </div>
